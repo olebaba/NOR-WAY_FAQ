@@ -1,0 +1,32 @@
+<div id="sprsmlList">
+  <input type="text" placeholder="Søk" />
+  <label>
+    <div class="sprsml">
+      <h3>Hva koster reisen?</h3>
+      <input type="checkbox" hidden onchange="console.log('check')" />
+      <p class="svar">Priser er basert på alder og antall soner. For mer oversikt trykk <a href="">her</a></p>
+    </div>
+  </label>
+  <div *ngFor="let sporsmal of alleSporsmal">
+    <label>
+      <div class="sprsml" *ngIf="sporsmal.svar != null || sporsmal.muligeSvar.length > 0">
+        <input type="checkbox" hidden onchange="console.log('check')" />
+        <h3>{{sporsmal.sporring}}</h3>
+        <div *ngIf="sporsmal.godkjentSvar != null">
+          Godkjent svar: <br />
+          <p>{{sporsmal.godkjentSvar}}</p>
+        </div>
+        <div class="svar">
+          Forslag:
+          <div class="muligeSvar" *ngFor="let muligSvar of sporsmal.muligeSvar">
+            <div style="display:block;">
+              <p>{{muligSvar}}</p> &nbsp;
+              <input class="checkKnapp" type="button" value="&#10004;" (click)="settRiktigSvar(alleSporsmal.indexOf(sporsmal), muligSvar)" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </label>
+
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<h2>Har du peiling? Ubesvarte spørsmål:</h2>
+<div *ngFor="let sporsmal of alleSporsmal">
+  <label>
+    <div class="sprsml" *ngIf="sporsmal.svar == null">
+      <input type="checkbox" hidden onchange="console.log('check')" />
+      <h3>{{sporsmal.sporring}}</h3>
+      <div class="svar">
+        <h6>Fra: {{sporsmal.epost}}</h6>
+        <form [formGroup]="skjema" (ngSubmit)="svarSporsmal(alleSporsmal.indexOf(sporsmal))">
+          <input type="text" [formControlName]="svar" placeholder="Svar" />
+          <input type="submit" value="Svar" />
+        </form>
+      </div>
+    </div>
+  </label>
+</div>

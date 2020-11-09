@@ -1,0 +1,17 @@
+<h2>Har du flere spørsmål?</h2>
+<div id="nyttSprsml">
+  <form [formGroup]="skjema" (ngSubmit)="vedSubmit()">
+    <input type="email" formControlName="epost" placeholder="Epost" />
+    <p class="alert alert-warning" [hidden]="skjema.controls.epost.valid || (skjema.controls.epost.pristine && !submitted)">
+      Epost er obligatorisk.
+    </p>
+    <input type="text" formControlName="sporring" placeholder="Spørsmål" />
+    <p class="alert alert-warning" [hidden]="skjema.controls.sporring.valid || (skjema.controls.sporring.pristine && !submitted)">
+      Spørsmål er obligatorisk.
+    </p>
+    <button type="submit" [disabled]="!skjema.valid">Send inn</button>
+  </form>
+</div>
+<br />
+<br />
+
