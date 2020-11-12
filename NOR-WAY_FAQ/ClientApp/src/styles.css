@@ -39,22 +39,22 @@ label{
   margin: auto;
 }
 
-.sprsml {
-  background-color: rgba(106, 226, 184, 0.7);
-  width: 60%;
-  border-radius: 1.5vw;
-  margin: 1vw auto;
+.topFold {
+    background-color: rgba(106, 226, 184, 0.7);
+    width: 60%;
+    border-radius: 1.5vw;
+    margin: 1vw auto;
 }
 
-.svar{
+.unfolds{
     display: none;
 }
 
-.sprsml:hover{
+.topFold:hover{
     cursor: pointer;
 }
 
-.sprsml input:checked ~ .svar {
+.topFold input:checked ~ .unfolds {
   display: block;
 }
 

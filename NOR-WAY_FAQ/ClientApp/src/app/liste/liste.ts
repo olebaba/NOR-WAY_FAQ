@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -8,6 +8,7 @@ import { sporsmal } from "../sporsmal";
   templateUrl: "liste.html"
 })
 export class Liste {
+  kategorier: Array<string> = new Array();
   alleSporsmal: Array<sporsmal>;
   laster: boolean;
 
@@ -18,11 +19,22 @@ export class Liste {
     this.hentAlleSporsmal();
   }
 
+  setKategorier(sporsmal) {
+    if (!this.kategorier.includes(sporsmal.kategori)) {
+      this.kategorier.push(sporsmal.kategori);
+    }
+  }
+
   hentAlleSporsmal() {
     this.http.get<sporsmal[]>("api/sporsmal/")
-      .subscribe(kundene => {
-        this.alleSporsmal = kundene;
+      .subscribe(sporsmalene => {
+        this.alleSporsmal = sporsmalene;
         this.laster = false;
+        console.log(this.alleSporsmal);
+        this.alleSporsmal.forEach(s => {
+          this.setKategorier(s);
+        });
+        console.log(this.kategorier);
       },
        error => console.log(error)
       );

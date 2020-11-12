@@ -10,6 +10,7 @@ namespace NOR_WAY_FAQ.Models
     {
         [Key]
         public int ID { get; set; }
+        public string Kategori { get; set; }
         public string Sporring { get; set; }
         public string Epost { get; set; }
         public string GodkjentSvar { get; set; }

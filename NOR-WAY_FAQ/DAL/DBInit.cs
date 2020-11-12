@@ -23,12 +23,31 @@ namespace NOR_WAY_FAQ.DAL
             var etSporsmal = new Sporsmal()
             {
                 Epost = "minepost@mail.noo",
+                Kategori = "Billetter",
                 Sporring = "Hvor ofte går bussen?",
-                GodkjentSvar = "For oversikt over avganger gå til <a href='#'>avganger</a >.",
+                GodkjentSvar = "For oversikt over avganger gå til avganger siden.",
                 MuligeSvar = "Hver dag." + ", " + "Kommer an på byen."
             };
 
-            db.Sporsmal.Add(etSporsmal);
+            var toSporsmal = new Sporsmal
+            {
+                Epost = "OlaNormann@norge.no",
+                Kategori = "Ruter",
+                Sporring = "Hvorfor går det ikke ruter til Sverige?",
+                GodkjentSvar = "Foreløpig er grensen til Sverige stengt.",
+                MuligeSvar = "Norge er best." + ", " + "Det går ikke.",
+            };
+
+            var treSporsmal = new Sporsmal
+            {
+                Epost = "perhanse@mail.comm",
+                Kategori = "Ruter",
+                Sporring = "Jeg vil lage min egen rute!",
+                GodkjentSvar = "Det er desverre ikke mulig.",
+                MuligeSvar = "Jeg og., Hvor da?"
+            };
+
+            db.Sporsmal.AddRange( etSporsmal, toSporsmal, treSporsmal );
             db.SaveChanges();
             Console.WriteLine(db.Sporsmal.Find(etSporsmal.ID));
         }

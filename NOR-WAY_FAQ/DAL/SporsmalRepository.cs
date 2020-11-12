@@ -43,6 +43,7 @@ namespace NOR_WAY_FAQ.DAL
                 List<Sporsmal> alleSporsmal = await _db.Sporsmal.Select(s => new Sporsmal
                 {
                     ID = s.ID,
+                    Kategori = s.Kategori,
                     Sporring = s.Sporring,
                     Epost = s.Epost,
                     GodkjentSvar = s.GodkjentSvar,

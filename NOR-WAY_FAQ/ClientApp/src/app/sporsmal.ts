@@ -1,5 +1,6 @@
 export class sporsmal {
   id: number;
+  kategori: string;
   epost: string;
   sporring: string;
   godkjentSvar: string;
