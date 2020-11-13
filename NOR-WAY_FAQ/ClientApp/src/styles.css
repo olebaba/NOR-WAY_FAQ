@@ -24,6 +24,10 @@ h1{
     margin-bottom: 5vh;
 }
 
+h2{
+    text-align: center;
+}
+
 p{
     display: inline;
 }
@@ -45,7 +49,6 @@ label{
     width: 60%;
     border-radius: 1.5vw;
     margin: 1vw auto;
-    z-index: -1;
 }
 
 .sporsmal, .svar{
@@ -78,4 +81,8 @@ form{
     display: flex;
     flex-direction: column;
     padding: 5%;
+}
+
+.tittel{
+    flex: 75%;
 }
