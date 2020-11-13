@@ -1,16 +1,26 @@
 <h2>Har du peiling? Ubesvarte spørsmål:</h2>
-<div *ngFor="let sporsmal of alleSporsmal">
-  <label>
-    <div class="sprsml" *ngIf="sporsmal.svar == null">
-      <input type="checkbox" hidden onchange="console.log('check')" />
-      <h3>{{sporsmal.sporring}}</h3>
-      <div class="svar">
-        <h6>Fra: {{sporsmal.epost}}</h6>
-        <form [formGroup]="skjema" (ngSubmit)="svarSporsmal(alleSporsmal.indexOf(sporsmal))">
-          <input type="text" [formControlName]="svar" placeholder="Svar" />
-          <input type="submit" value="Svar" />
-        </form>
+<div id="{{kategori}}" class="kategori" *ngFor="let kategori of kategorier" #element (click)="this[kategori] = this[kategori] && !sporsmalOpen ? false : true">
+  <div *ngIf="true">
+    <h2>{{kategori}}</h2>
+    <div class="sporsmal" [ngStyle]="{'display':(this[kategori] || this[sporsmal.sporring]) ? 'block' : 'none'}" *ngFor="let sporsmal of ubesvarteSporsmal" (click)="this[sporsmal.sporring] = this[sporsmal.sporring] ? false : true">
+      <div *ngIf="sporsmal.kategori == kategori">
+        <h3>{{sporsmal.sporring}}</h3>
+        <div class="svar" *ngIf="true" [ngStyle]="{'display':(this[sporsmal.sporring]) ? 'block' : 'none'}">
+          <form [formGroup]="skjema" (ngSubmit)="vedSubmit(sporsmal.id)">
+            <input type="text" formControlName="svar" placeholder="Ditt svar" />
+            <p class="alert alert-warning" [hidden]="skjema.controls.svar.valid || (skjema.controls.svar.pristine && !submitted)">
+              Svar er obligatorisk.
+            </p>
+          </form>
+          <b>Andres forslag:</b>
+          <div class="muligeSvar" *ngIf="sporsmal.muligeSvar != null">
+            <div style="display:block;" *ngFor="let svar of sporsmal.muligeSvar.split(',')">
+              <p [innerHTML]="svar"></p> &nbsp;
+              <input class="checkKnapp" type="button" value="&#10004;" (click)="settRiktigSvar(sporsmal.id, svar)" />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </label>
+  </div>
 </div>

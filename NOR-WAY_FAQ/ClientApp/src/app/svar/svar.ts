@@ -9,14 +9,15 @@ import { sporsmal } from '../sporsmal';
 })
 export class Svar {
   skjema: FormGroup;
-  alleSporsmal: Array<sporsmal>;
+  ubesvarteSporsmal: Array<sporsmal>;
+  kategorier: Array<string> = new Array();
   laster: boolean = true;
 
   validering = {
     id: [""],
-    epost: [
-      null, Validators.compose([Validators.required, Validators.pattern("/^ [^@\s]+@[^@\s\.]+\.[^@\.\s]+$/")])
-    ],
+    svar: [
+      null, Validators.required
+    ]
   }
 
   constructor(private http: HttpClient, private fb: FormBuilder, private router: Router) {
@@ -25,49 +26,61 @@ export class Svar {
 
   ngOnInit() {
     this.laster = true;
-    this.hentAlleSporsmal();
+    this.hentUbesvarteSporsmal();
   }
 
-  vedSubmit() {
-      this.endreEtSporsmal();
+  vedSubmit(id) {
+    this.sendSvar(id);
   }
 
-  hentAlleSporsmal() {
-    this.http.get<sporsmal[]>("api/sporsmal/")
-      .subscribe(kundene => {
-        this.alleSporsmal = kundene;
+  hentUbesvarteSporsmal() {
+    this.http.get<sporsmal[]>("api/sporsmal/ubesvarte")
+      .subscribe(sporsmalene => {
+        this.ubesvarteSporsmal = sporsmalene;
         this.laster = false;
+        console.log(this.ubesvarteSporsmal);
+        this.ubesvarteSporsmal.forEach(us => {
+          this.setKategorier(us);
+        })
       },
         error => console.log(error)
       );
   };
 
-  endreSporsmal(id: number) {
-    this.http.get<sporsmal>("api/sporsmal/" + id)
+  sendSvar(id) {
+    const endretSporsmal = this.ubesvarteSporsmal.find(us => {
+      return us.id == id;
+    });
+    console.log(endretSporsmal);
+    endretSporsmal.muligeSvar += ", " + this.skjema.value.svar;
+    this.endreEtSporsmal(endretSporsmal);
+  }
+
+  endreEtSporsmal(endretSporsmal) {
+    console.log(endretSporsmal);
+
+    this.http.put("api/sporsmal/", endretSporsmal)
       .subscribe(
-        sporsmal => {
-          this.skjema.patchValue({ id: sporsmal.id });
-          this.skjema.patchValue({ epost: sporsmal.epost });
-          this.skjema.patchValue({ godkjentSvar: sporsmal.godkjentSvar });
-          this.skjema.patchValue({ sporring: sporsmal.sporring });
-          this.skjema.patchValue({ muligeSvar: sporsmal.muligeSvar });
+        retur => {
+          this.router.navigate(['/svar']);
         },
         error => console.log(error)
       );
   }
 
-  endreEtSporsmal() {
-    const endretSporsmal = new sporsmal(this.skjema.value.epost, this.skjema.value.sporring);
-    endretSporsmal.id = this.skjema.value.id;
-    endretSporsmal.godkjentSvar = this.skjema.value.godkjentSvar;
-    endretSporsmal.muligeSvar = this.skjema.value.muligeSvar;
+  setKategorier(sporsmal) {
+    if (!this.kategorier.includes(sporsmal.kategori)) {
+      this.kategorier.push(sporsmal.kategori);
+    }
+  }
 
-    this.http.put("api/sporsmal/", endretSporsmal)
-      .subscribe(
-        retur => {
-          this.router.navigate(['/liste']);
-        },
-        error => console.log(error)
-      );
+  settRiktigSvar(id, svaret: string): void {
+    const endretSporsmal = this.ubesvarteSporsmal.find(us => {
+      return us.id == id;
+    });
+    console.log(endretSporsmal);
+    endretSporsmal.godkjentSvar = svaret;
+
+    this.endreEtSporsmal(endretSporsmal);
   }
 }

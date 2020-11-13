@@ -1,21 +1,20 @@
+import { Input } from "@angular/core";
+
 export class sporsmal {
   id: number;
   kategori: string;
   epost: string;
   sporring: string;
-  godkjentSvar: string;
-  muligeSvar: Array<string> = [];
+  muligeSvar: string;
 
-  constructor(epost: string, sporring: string) {
+  constructor(epost: string, kategori: string, sporring: string) {
     this.epost = epost;
+    this.kategori = kategori;
     this.sporring = sporring;
   }
 
-  setEtSvar(svarforslag: string) {
-    this.muligeSvar.push(svarforslag);
-  }
-
-  setFaktiskSvar(svar: string) {
+  @Input()
+  set godkjentSvar(svar: string) {
     this.godkjentSvar = svar;
   }
 }

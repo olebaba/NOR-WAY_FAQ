@@ -39,23 +39,21 @@ label{
   margin: auto;
 }
 
-.topFold {
+.kategori {
     background-color: rgba(106, 226, 184, 0.7);
     width: 60%;
     border-radius: 1.5vw;
     margin: 1vw auto;
+    z-index: -1;
 }
 
-.unfolds{
+.sporsmal, .svar{
     display: none;
+    margin: 2vh auto;
 }
 
-.topFold:hover{
+.kategori:hover, .sporsmal:hover{
     cursor: pointer;
-}
-
-.topFold input:checked ~ .unfolds {
-  display: block;
 }
 
 .muligeSvar{

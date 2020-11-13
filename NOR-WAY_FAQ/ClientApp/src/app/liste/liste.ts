@@ -25,6 +25,15 @@ export class Liste {
     }
   }
 
+  kategoriHarSporsmal(kategori) {
+    var finnes = false;
+    this.alleSporsmal.forEach(s => {
+      if (s.kategori == kategori && s.godkjentSvar != null)
+        finnes = true;
+    });
+    return finnes;
+  }
+
   hentAlleSporsmal() {
     this.http.get<sporsmal[]>("api/sporsmal/")
       .subscribe(sporsmalene => {
@@ -49,4 +58,26 @@ export class Liste {
        error => console.log(error)
       );
   };
+
+  settRiktigSvar(id, svaret: string): void {
+    const endretSporsmal = this.alleSporsmal.find(us => {
+      return us.id == id;
+    });
+    console.log(endretSporsmal);
+    endretSporsmal.godkjentSvar = svaret;
+
+    this.endreEtSporsmal(endretSporsmal);
+  }
+
+  endreEtSporsmal(endretSporsmal) {
+    console.log(endretSporsmal);
+
+    this.http.put("api/sporsmal/", endretSporsmal)
+      .subscribe(
+        retur => {
+          this.router.navigate(['/']);
+        },
+        error => console.log(error)
+      );
+  }
 }
