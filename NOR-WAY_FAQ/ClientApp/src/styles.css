@@ -35,27 +35,26 @@ label{
 #mainDiv {
   background-color: white; /*#AAFFE1;*/
   width: 60%;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   margin: auto;
 }
 
-.topFold {
+.kategori {
     background-color: rgba(106, 226, 184, 0.7);
     width: 60%;
     border-radius: 1.5vw;
     margin: 1vw auto;
+    z-index: -1;
 }
 
-.unfolds{
+.sporsmal, .svar{
     display: none;
+    margin: 2vh auto;
 }
 
-.topFold:hover{
+.kategori:hover, .sporsmal:hover{
     cursor: pointer;
-}
-
-.topFold input:checked ~ .unfolds {
-  display: block;
 }
 
 .muligeSvar{
@@ -66,4 +65,10 @@ label{
     background-color: floralwhite;
     color: aliceblue;
     border-radius: 3em;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    padding: 5%;
 }

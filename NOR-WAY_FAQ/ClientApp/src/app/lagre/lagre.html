@@ -1,6 +1,10 @@
 <h2>Har du flere spørsmål?</h2>
 <div id="nyttSprsml">
-  <form [formGroup]="skjema" (ngSubmit)="vedSubmit()">
+  <form class="innSkjema" [formGroup]="skjema" (ngSubmit)="vedSubmit()">
+    <input type="text" formControlName="kategori" placeholder="Kategori" />
+    <p class="alert alert-warning" [hidden]="skjema.controls.kategori.valid || (skjema.controls.kategori.pristine && !submitted)">
+      Kategori er obligatorisk.
+    </p>
     <input type="email" formControlName="epost" placeholder="Epost" />
     <p class="alert alert-warning" [hidden]="skjema.controls.epost.valid || (skjema.controls.epost.pristine && !submitted)">
       Epost er obligatorisk.

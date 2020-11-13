@@ -13,11 +13,14 @@ export class Lagre {
   validering = {
     id: [""],
     epost: [
-      null, [Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]
+      null, [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]
     ],
     sporring: [
       null, Validators.required
     ],
+    kategori: [
+      null, Validators.required
+    ]
   }
 
   constructor(private http: HttpClient, private fb: FormBuilder, private router: Router) {
@@ -29,10 +32,8 @@ export class Lagre {
   }
 
   lagreSporsmal() {
-    const nyttSporsmal = new sporsmal(this.skjema.value.epost, this.skjema.value.sporring);
-    nyttSporsmal.id = this.skjema.value.id;
-    nyttSporsmal.godkjentSvar = this.skjema.value.godkjentSvar;
-    nyttSporsmal.muligeSvar = this.skjema.value.muligeSvar;
+    const nyttSporsmal = new sporsmal(this.skjema.value.epost, this.skjema.value.kategori, this.skjema.value.sporring);
+    console.log(nyttSporsmal);
 
     this.http.post("api/sporsmal/", nyttSporsmal)
       .subscribe(retur => {

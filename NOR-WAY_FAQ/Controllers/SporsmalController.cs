@@ -48,5 +48,32 @@ namespace NOR_WAY_FAQ.Controllers
             return Ok(alleSporsmal);
         }
 
+        [HttpGet("ubesvarte")]
+        public List<Sporsmal> HentUbesvarte()
+        {
+            Console.WriteLine("Henter ubesvarte");
+            List<Sporsmal> ubesvarteSporsmal = _db.HentUbesvarte();
+            return ubesvarteSporsmal;
+        }
+        [HttpPut]
+
+        public async Task<ActionResult> Endre(Sporsmal endretSporsmal)
+        {
+            Console.WriteLine("Endrer spørsmål");
+            if (ModelState.IsValid)
+            {
+                bool returOK = await _db.Endre(endretSporsmal);
+                if (!returOK)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
     }
 }

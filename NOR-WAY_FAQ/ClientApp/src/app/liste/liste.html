@@ -1,35 +1,25 @@
 <div id="sprsmlList">
   <input type="text" placeholder="Søk" />
-  <div *ngFor="let kategori of kategorier">
-    <div *ngFor="let sporsmal of alleSporsmal">
-      <div *ngIf="sporsmal.kategori == kategori">
-        <label>
-          <div class="topFold" *ngIf="sporsmal.svar != null || sporsmal.muligeSvar.length > 0">
-            <input type="checkbox" hidden onchange="console.log('check')" />
-            <h2>{{kategori}}</h2>
-            <div class="unfolds">
-              <label>
-                <div class="topFold" *ngIf="sporsmal.svar != null || sporsmal.muligeSvar.length > 0">
-                  <input type="checkbox" hidden onchange="console.log('check')" />
-                  <h3>{{sporsmal.sporring}}</h3>
-                  <div class="unfolds">
-                    <div *ngIf="sporsmal.godkjentSvar != null">
-                      <b>Godkjent svar:</b><br />
-                      <p>{{sporsmal.godkjentSvar}}</p>
-                    </div>
-                    <b>Forslag:</b>
-                    <div class="muligeSvar">
-                      <div style="display:block;" *ngFor="let svar of sporsmal.muligeSvar.split(',')">
-                        <p [innerHTML]="svar"></p> &nbsp;
-                        <input class="checkKnapp" type="button" value="&#10004;" (click)="settRiktigSvar(alleSporsmal.indexOf(sporsmal), muligSvar)" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </label>
+  <div id="{{kategori}}" class="kategori" *ngFor="let kategori of kategorier" >
+    <div *ngIf="kategoriHarSporsmal(kategori)">
+      <h2 (click)="this[kategori] = this[kategori] && !sporsmalOpen ? false : true">{{kategori}}</h2>
+      <div class="sporsmal" [ngStyle]="{'display':(this[kategori] || this[sporsmal.sporring]) ? 'block' : 'none'}" *ngFor="let sporsmal of alleSporsmal">
+        <div *ngIf="sporsmal.kategori == kategori && (sporsmal.svar != null || sporsmal.muligeSvar != null)">
+          <h3 (click)="this[sporsmal.sporring] = this[sporsmal.sporring] ? false : true">{{sporsmal.sporring}}</h3>
+          <div class="svar" *ngIf="sporsmal.svar != null || sporsmal.muligeSvar.length > 0" [ngStyle]="{'display':(this[sporsmal.sporring]) ? 'block' : 'none'}">
+            <div *ngIf="sporsmal.godkjentSvar != null">
+              <b>Godkjent svar:</b><br />
+              <p>{{sporsmal.godkjentSvar}}</p>
+            </div>
+            <b>Forslag:</b>
+            <div class="muligeSvar">
+              <div style="display:block;" *ngFor="let svar of sporsmal.muligeSvar.split(',')">
+                <p [innerHTML]="svar"></p> &nbsp;
+                <input class="checkKnapp" type="button" value="&#10004;" (click)="settRiktigSvar(sporsmal.id, svar)" />
+              </div>
             </div>
           </div>
-        </label>
+        </div>
       </div>
     </div>
   </div>

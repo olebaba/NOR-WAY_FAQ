@@ -10,5 +10,7 @@ namespace NOR_WAY_FAQ.DAL
     {
         Task<bool> Lagre(Sporsmal innSporsmal);
         Task<List<Sporsmal>> HentAlle();
+        List<Sporsmal> HentUbesvarte();
+        Task<bool> Endre(Sporsmal endretSporsmal);
     }
 }
