@@ -52,7 +52,12 @@ export class Svar {
       return us.id == id;
     });
     console.log(endretSporsmal);
-    endretSporsmal.muligeSvar += ", " + this.skjema.value.svar;
+    if (endretSporsmal.muligeSvar != null) {
+      endretSporsmal.muligeSvar += "@@@" + this.skjema.value.svar;
+    } else {
+      endretSporsmal.muligeSvar = this.skjema.value.svar;
+    }
+    
     this.endreEtSporsmal(endretSporsmal);
   }
 

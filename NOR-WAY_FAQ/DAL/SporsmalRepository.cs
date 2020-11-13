@@ -26,9 +26,10 @@ namespace NOR_WAY_FAQ.DAL
                     Epost = innSporsmal.Epost,
                     Sporring = innSporsmal.Sporring,
                     Kategori = innSporsmal.Kategori,
-                    GodkjentSvar = innSporsmal.GodkjentSvar,
-                    MuligeSvar = innSporsmal.MuligeSvar
+                    MuligeSvar = innSporsmal.MuligeSvar,
+                    GodkjentSvar = innSporsmal.GodkjentSvar
                 };
+
                 _db.Sporsmal.Add(nyttSporsmal);
                 await _db.SaveChangesAsync();
                 return true;

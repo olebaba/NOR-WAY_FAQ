@@ -11,11 +11,11 @@
               <b>Godkjent svar:</b><br />
               <p>{{sporsmal.godkjentSvar}}</p>
             </div>
-            <b>Forslag:</b>
-            <div class="muligeSvar">
-              <div style="display:block;" *ngFor="let svar of sporsmal.muligeSvar.split(',')">
+            <b (click)="this[sporsmal.muligeSvar] = this[sporsmal.muligeSvar] ? false : true">Vis/skjul forslag</b>
+            <div class="muligeSvar" [ngStyle]="{'display':this[sporsmal.muligeSvar] ? 'inline' : 'none'}">
+              <div style="display:block;" *ngFor="let svar of sporsmal.muligeSvar.split('@@@')">
                 <p [innerHTML]="svar"></p> &nbsp;
-                <input class="checkKnapp" type="button" value="&#10004;" (click)="settRiktigSvar(sporsmal.id, svar)" />
+                <input class="checkKnapp" type="button" value="&#10004;" title="Sett godkjent" alt="Sett godkjent" (click)="settRiktigSvar(sporsmal.id, svar)" />
               </div>
             </div>
           </div>

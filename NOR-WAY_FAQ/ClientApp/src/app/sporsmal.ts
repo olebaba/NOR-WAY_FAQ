@@ -6,15 +6,11 @@ export class sporsmal {
   epost: string;
   sporring: string;
   muligeSvar: string;
+  godkjentSvar: string;
 
   constructor(epost: string, kategori: string, sporring: string) {
     this.epost = epost;
     this.kategori = kategori;
     this.sporring = sporring;
-  }
-
-  @Input()
-  set godkjentSvar(svar: string) {
-    this.godkjentSvar = svar;
   }
 }

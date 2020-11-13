@@ -61,6 +61,13 @@ label{
     display: inline;
 }
 
+.forslag {
+  display: block;
+  border-radius: 1em;
+  margin: 1vh;
+  background-color: rgba(223, 255, 250, 0.56);
+}
+
 .checkKnapp{
     background-color: floralwhite;
     color: aliceblue;

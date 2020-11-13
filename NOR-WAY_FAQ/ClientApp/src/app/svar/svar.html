@@ -6,6 +6,7 @@
       <div *ngIf="sporsmal.kategori == kategori">
         <h3 (click)="this[sporsmal.sporring] = this[sporsmal.sporring] ? false : true">{{sporsmal.sporring}}</h3>
         <div class="svar" *ngIf="true" [ngStyle]="{'display':(this[sporsmal.sporring]) ? 'block' : 'none'}">
+          <p>Stilt av: {{sporsmal.epost.split('@')[0]}}</p>
           <form [formGroup]="skjema" (ngSubmit)="vedSubmit(sporsmal.id)">
             <input type="text" formControlName="svar" placeholder="Ditt svar" />
             <p class="alert alert-warning" [hidden]="skjema.controls.svar.valid || (skjema.controls.svar.pristine && !submitted)">
@@ -14,7 +15,7 @@
           </form>
           <b>Andres forslag:</b>
           <div class="muligeSvar" *ngIf="sporsmal.muligeSvar != null">
-            <div style="display:block;" *ngFor="let svar of sporsmal.muligeSvar.split(',')">
+            <div class="forslag" *ngFor="let svar of sporsmal.muligeSvar.split('@@@')">
               <p [innerHTML]="svar"></p> &nbsp;
               <input class="checkKnapp" type="button" value="&#10004;" (click)="settRiktigSvar(sporsmal.id, svar)" />
             </div>
