@@ -1,10 +1,10 @@
 <h2>Har du peiling? Ubesvarte spørsmål:</h2>
-<div id="{{kategori}}" class="kategori" *ngFor="let kategori of kategorier" #element (click)="this[kategori] = this[kategori] && !sporsmalOpen ? false : true">
+<div id="{{kategori}}" class="kategori" *ngFor="let kategori of kategorier">
   <div *ngIf="true">
-    <h2>{{kategori}}</h2>
-    <div class="sporsmal" [ngStyle]="{'display':(this[kategori] || this[sporsmal.sporring]) ? 'block' : 'none'}" *ngFor="let sporsmal of ubesvarteSporsmal" (click)="this[sporsmal.sporring] = this[sporsmal.sporring] ? false : true">
+    <h2 (click)="this[kategori] = this[kategori] && !sporsmalOpen ? false : true">{{kategori}}</h2>
+    <div class="sporsmal" [ngStyle]="{'display':(this[kategori] || this[sporsmal.sporring]) ? 'block' : 'none'}" *ngFor="let sporsmal of ubesvarteSporsmal">
       <div *ngIf="sporsmal.kategori == kategori">
-        <h3>{{sporsmal.sporring}}</h3>
+        <h3 (click)="this[sporsmal.sporring] = this[sporsmal.sporring] ? false : true">{{sporsmal.sporring}}</h3>
         <div class="svar" *ngIf="true" [ngStyle]="{'display':(this[sporsmal.sporring]) ? 'block' : 'none'}">
           <form [formGroup]="skjema" (ngSubmit)="vedSubmit(sporsmal.id)">
             <input type="text" formControlName="svar" placeholder="Ditt svar" />

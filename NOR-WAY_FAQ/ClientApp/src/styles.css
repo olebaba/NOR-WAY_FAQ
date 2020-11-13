@@ -35,7 +35,8 @@ label{
 #mainDiv {
   background-color: white; /*#AAFFE1;*/
   width: 60%;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   margin: auto;
 }
 
@@ -64,4 +65,10 @@ label{
     background-color: floralwhite;
     color: aliceblue;
     border-radius: 3em;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    padding: 5%;
 }

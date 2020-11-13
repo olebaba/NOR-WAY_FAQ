@@ -1,11 +1,11 @@
 <div id="sprsmlList">
   <input type="text" placeholder="Søk" />
-  <div id="{{kategori}}" class="kategori" *ngFor="let kategori of kategorier" #element (click)="this[kategori] = this[kategori] && !sporsmalOpen ? false : true">
+  <div id="{{kategori}}" class="kategori" *ngFor="let kategori of kategorier" >
     <div *ngIf="kategoriHarSporsmal(kategori)">
-      <h2>{{kategori}}</h2>
-      <div class="sporsmal" [ngStyle]="{'display':(this[kategori] || this[sporsmal.sporring]) ? 'block' : 'none'}" *ngFor="let sporsmal of alleSporsmal" (click)="this[sporsmal.sporring] = this[sporsmal.sporring] ? false : true">
+      <h2 (click)="this[kategori] = this[kategori] && !sporsmalOpen ? false : true">{{kategori}}</h2>
+      <div class="sporsmal" [ngStyle]="{'display':(this[kategori] || this[sporsmal.sporring]) ? 'block' : 'none'}" *ngFor="let sporsmal of alleSporsmal">
         <div *ngIf="sporsmal.kategori == kategori && (sporsmal.svar != null || sporsmal.muligeSvar != null)">
-          <h3>{{sporsmal.sporring}}</h3>
+          <h3 (click)="this[sporsmal.sporring] = this[sporsmal.sporring] ? false : true">{{sporsmal.sporring}}</h3>
           <div class="svar" *ngIf="sporsmal.svar != null || sporsmal.muligeSvar.length > 0" [ngStyle]="{'display':(this[sporsmal.sporring]) ? 'block' : 'none'}">
             <div *ngIf="sporsmal.godkjentSvar != null">
               <b>Godkjent svar:</b><br />
