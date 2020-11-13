@@ -77,6 +77,11 @@ label{
     border-radius: 3em;
 }
 
+.tommelKnapp {
+  border-radius: 0.5vw;
+  width: 4vw;
+}
+
 form{
     display: flex;
     flex-direction: column;

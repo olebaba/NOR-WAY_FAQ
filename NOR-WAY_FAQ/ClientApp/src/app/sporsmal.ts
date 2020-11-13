@@ -7,6 +7,7 @@ export class sporsmal {
   sporring: string;
   muligeSvar: string;
   godkjentSvar: string;
+  rating: number;
 
   constructor(epost: string, kategori: string, sporring: string) {
     this.epost = epost;

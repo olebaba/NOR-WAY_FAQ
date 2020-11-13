@@ -49,16 +49,6 @@ export class Liste {
       );
   };
 
-  sletteSporsmal(id: number) {
-    this.http.delete("api/sporsmal/" + id)
-      .subscribe(retur => {
-        this.hentAlleSporsmal();
-        this.router.navigate(['/liste']);
-      },
-       error => console.log(error)
-      );
-  };
-
   settRiktigSvar(id, svaret: string): void {
     const endretSporsmal = this.alleSporsmal.find(us => {
       return us.id == id;
@@ -79,5 +69,15 @@ export class Liste {
         },
         error => console.log(error)
       );
+  }
+
+  tommelOpp(id) {
+    const endretSporsmal = this.alleSporsmal.find(us => {
+      return us.id == id;
+    });
+
+    endretSporsmal.rating++;
+
+    this.endreEtSporsmal(endretSporsmal);
   }
 }

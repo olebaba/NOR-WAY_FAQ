@@ -1,5 +1,5 @@
 <div id="sprsmlList">
-  <input type="text" placeholder="Søk" />
+  <!--<input type="text" placeholder="Søk" />-->
   <div id="{{kategori}}" class="kategori" *ngFor="let kategori of kategorier">
     <div *ngIf="kategoriHarSporsmal(kategori)">
       <div style="display: flex;" (click)="this[kategori] = this[kategori] ? false : true">
@@ -14,6 +14,10 @@
           </div>
           <div class="svar" *ngIf="sporsmal.svar != null || sporsmal.muligeSvar.length > 0" [ngStyle]="{'display':(this[sporsmal.sporring]) ? 'block' : 'none'}">
             <div *ngIf="sporsmal.godkjentSvar != null">
+              Var dette nyttig?
+              <a><img class="tommelKnapp" src="../../assets/thumbsup.jpg" (click)="tommelOpp(sporsmal.id)" /></a>
+              {{sporsmal.rating}}
+              <br />
               <b>Godkjent svar:</b><br />
               <p>{{sporsmal.godkjentSvar}}</p>
             </div>

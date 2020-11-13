@@ -27,7 +27,8 @@ namespace NOR_WAY_FAQ.DAL
                     Sporring = innSporsmal.Sporring,
                     Kategori = innSporsmal.Kategori,
                     MuligeSvar = innSporsmal.MuligeSvar,
-                    GodkjentSvar = innSporsmal.GodkjentSvar
+                    GodkjentSvar = innSporsmal.GodkjentSvar,
+                    Rating = innSporsmal.Rating
                 };
 
                 _db.Sporsmal.Add(nyttSporsmal);
@@ -49,6 +50,7 @@ namespace NOR_WAY_FAQ.DAL
                 gammelSporsmal.GodkjentSvar = endretSporsmal.GodkjentSvar;
                 gammelSporsmal.Kategori = endretSporsmal.Kategori;
                 gammelSporsmal.Epost = endretSporsmal.Epost;
+                gammelSporsmal.Rating = endretSporsmal.Rating;
 
                 await _db.SaveChangesAsync();
                 return true;
@@ -71,6 +73,7 @@ namespace NOR_WAY_FAQ.DAL
                     Epost = s.Epost,
                     GodkjentSvar = s.GodkjentSvar,
                     MuligeSvar = s.MuligeSvar,
+                    Rating = s.Rating
                 }).ToListAsync();
 
                 return alleSporsmal;

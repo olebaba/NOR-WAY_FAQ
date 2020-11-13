@@ -17,7 +17,7 @@ namespace NOR_WAY_FAQ.DAL
             var db = serviceScope.ServiceProvider.GetService<SporsmalContext>();
 
             // må slette og opprette databasen hver gang når den skal initieres (seed`es)
-            db.Database.EnsureDeleted();
+            //db.Database.EnsureDeleted();
             db.Database.EnsureCreated();
 
             var etSporsmal = new Sporsmal()
@@ -26,7 +26,8 @@ namespace NOR_WAY_FAQ.DAL
                 Kategori = "Billetter",
                 Sporring = "Hvor ofte går bussen?",
                 GodkjentSvar = "For oversikt over avganger gå til avganger siden.",
-                MuligeSvar = "Hver dag." + ", " + "Kommer an på byen."
+                MuligeSvar = "Hver dag.@@@Kommer an på byen.",
+                Rating = 5
             };
 
             var toSporsmal = new Sporsmal
@@ -35,7 +36,8 @@ namespace NOR_WAY_FAQ.DAL
                 Kategori = "Ruter",
                 Sporring = "Hvorfor går det ikke ruter til Sverige?",
                 GodkjentSvar = "Foreløpig er grensen til Sverige stengt.",
-                MuligeSvar = "Norge er best." + ", " + "Det går ikke.",
+                MuligeSvar = "Norge er best.@@@Det går ikke.",
+                Rating = 1
             };
 
             var treSporsmal = new Sporsmal
@@ -44,7 +46,8 @@ namespace NOR_WAY_FAQ.DAL
                 Kategori = "Ruter",
                 Sporring = "Jeg vil lage min egen rute!",
                 GodkjentSvar = "Det er desverre ikke mulig.",
-                MuligeSvar = "Jeg og., Hvor da?"
+                MuligeSvar = "Jeg og.@@@Hvor da?",
+                Rating = 34
             };
 
             db.Sporsmal.AddRange( etSporsmal, toSporsmal, treSporsmal );

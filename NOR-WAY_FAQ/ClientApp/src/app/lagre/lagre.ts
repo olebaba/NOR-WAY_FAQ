@@ -37,7 +37,7 @@ export class Lagre {
 
     this.http.post("api/sporsmal/", nyttSporsmal)
       .subscribe(retur => {
-        this.router.navigate(['/liste']);
+        this.router.navigate(['/svar']);
       },
        error => console.log(error)
       );

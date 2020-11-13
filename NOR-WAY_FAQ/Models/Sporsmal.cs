@@ -15,6 +15,7 @@ namespace NOR_WAY_FAQ.Models
         public string Epost { get; set; }
         public string GodkjentSvar { get; set; }
         public string MuligeSvar { get; set; }
+        public int Rating { get; set; }
 
     }
 }
