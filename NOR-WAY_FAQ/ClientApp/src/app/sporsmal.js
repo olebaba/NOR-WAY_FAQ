@@ -7,9 +7,6 @@ var sporsmal = /** @class */ (function () {
         this.kategori = kategori;
         this.sporring = sporring;
     }
-    sporsmal.prototype.setFaktiskSvar = function (svar) {
-        this.godkjentSvar = svar;
-    };
     return sporsmal;
 }());
 exports.sporsmal = sporsmal;

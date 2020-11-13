@@ -1,21 +1,31 @@
 <div id="sprsmlList">
-  <input type="text" placeholder="Søk" />
-  <div id="{{kategori}}" class="kategori" *ngFor="let kategori of kategorier" >
+  <!--<input type="text" placeholder="Søk" />-->
+  <div id="{{kategori}}" class="kategori" *ngFor="let kategori of kategorier">
     <div *ngIf="kategoriHarSporsmal(kategori)">
-      <h2 (click)="this[kategori] = this[kategori] && !sporsmalOpen ? false : true">{{kategori}}</h2>
+      <div style="display: flex;" (click)="this[kategori] = this[kategori] ? false : true">
+        <h2 style="margin-left: 2vw;">{{(this[kategori] ? '-' : '+')}}</h2>
+        <h2 class="tittel">{{kategori}}</h2>
+      </div>
       <div class="sporsmal" [ngStyle]="{'display':(this[kategori] || this[sporsmal.sporring]) ? 'block' : 'none'}" *ngFor="let sporsmal of alleSporsmal">
         <div *ngIf="sporsmal.kategori == kategori && (sporsmal.svar != null || sporsmal.muligeSvar != null)">
-          <h3 (click)="this[sporsmal.sporring] = this[sporsmal.sporring] ? false : true">{{sporsmal.sporring}}</h3>
+          <div style="display: flex;">
+            <h4 style="margin-left: 2vw;">{{this[sporsmal.sporring] ? '-' : '+'}}</h4>
+            <h4 class="tittel" (click)="this[sporsmal.sporring] = this[sporsmal.sporring] ? false : true">{{sporsmal.sporring}}</h4>
+          </div>
           <div class="svar" *ngIf="sporsmal.svar != null || sporsmal.muligeSvar.length > 0" [ngStyle]="{'display':(this[sporsmal.sporring]) ? 'block' : 'none'}">
             <div *ngIf="sporsmal.godkjentSvar != null">
+              Var dette nyttig?
+              <a><img class="tommelKnapp" src="../../assets/thumbsup.jpg" (click)="tommelOpp(sporsmal.id)" /></a>
+              {{sporsmal.rating}}
+              <br />
               <b>Godkjent svar:</b><br />
               <p>{{sporsmal.godkjentSvar}}</p>
             </div>
-            <b>Forslag:</b>
-            <div class="muligeSvar">
-              <div style="display:block;" *ngFor="let svar of sporsmal.muligeSvar.split(',')">
+            <b (click)="this[sporsmal.muligeSvar] = this[sporsmal.muligeSvar] ? false : true">{{(this[sporsmal.muligeSvar]) ? 'Skjul' : 'Vis'}} forslag</b>
+            <div class="muligeSvar" [ngStyle]="{'display':this[sporsmal.muligeSvar] ? 'inline' : 'none'}">
+              <div style="display:block;" *ngFor="let svar of sporsmal.muligeSvar.split('@@@')">
                 <p [innerHTML]="svar"></p> &nbsp;
-                <input class="checkKnapp" type="button" value="&#10004;" (click)="settRiktigSvar(sporsmal.id, svar)" />
+                <input class="checkKnapp" type="button" value="&#10004;" title="Sett godkjent" alt="Sett godkjent" (click)="settRiktigSvar(sporsmal.id, svar)" />
               </div>
             </div>
           </div>
